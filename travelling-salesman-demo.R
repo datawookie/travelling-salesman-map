@@ -28,6 +28,8 @@ library(TSP)
 
 # GEOCODE -------------------------------------------------------------------------------------------------------------
 
+# Due to changes in the Google Maps Terms of Service, this code will not work without first registering an API key.
+#
 geocode_df <- function(address) {
   reply <- geocode(address, output = "all")$results[[1]]
   
