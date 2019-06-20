@@ -26,10 +26,14 @@ library(ggmap)
 library(gmapsdistance)
 library(TSP)
 
-# GEOCODE -------------------------------------------------------------------------------------------------------------
-
 # Due to changes in the Google Maps Terms of Service, this code will not work without first registering an API key.
 #
+api_key = Sys.getenv("GOOGLE_API_KEY")
+#
+register_google(key = api_key)
+
+# GEOCODE -------------------------------------------------------------------------------------------------------------
+
 geocode_df <- function(address) {
   reply <- geocode(address, output = "all")$results[[1]]
   
