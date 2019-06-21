@@ -31,6 +31,7 @@ library(TSP)
 api_key = Sys.getenv("GOOGLE_API_KEY")
 #
 register_google(key = api_key)
+set.api.key(api_key)
 
 # GEOCODE -------------------------------------------------------------------------------------------------------------
 
@@ -56,9 +57,9 @@ addresses <- ADDRESSES %>%
 # instance.
 #
 distances <- gmapsdistance(origin = addresses$latlon,
-                          destination = addresses$latlon,
-                          combinations = "all",
-                          mode = "driving")$Distance[, -1]
+                           destination = addresses$latlon,
+                           combinations = "all",
+                           mode = "driving")$Distance[, -1]
 
 # Scale to km.
 #
@@ -102,6 +103,7 @@ addresses <- addresses[tour_order,]
 # BUILD ROUTE ---------------------------------------------------------------------------------------------------------
 
 route <- lapply(seq(nrow(addresses) - 1), function(n) {
+  print(n)
   route(addresses$latlon[n], addresses$latlon[n+1], structure = "route") %>%
     mutate(section = n)
 })
